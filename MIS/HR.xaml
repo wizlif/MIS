@@ -1,0 +1,78 @@
+﻿<Controls:MetroWindow
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MIS"
+         xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+    xmlns:calendar="clr-namespace:Telerik.Windows.Controls.Calendar;assembly=Telerik.Windows.Controls.Input"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="MIS.WindowHR" x:Name="WindowHumanR"
+        mc:Ignorable="d"
+                      ShowIconOnTitleBar="True"
+        ResizeMode="CanResize"
+                      ShowMinButton="True"
+                      WindowStartupLocation="CenterScreen"
+                      SaveWindowPosition="True"
+                      BorderBrush="{DynamicResource AccentColorBrush}"
+                      BorderThickness="1"
+        Title=""  FontFamily="Segoe UI Light" FontSize="16" Icon="Images/Ruby Gemstone_48px.png" MinHeight="370"  Loaded="WindowHumanR_Loaded">
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20" Source="Images/Settings_48px.png"/>
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Settings"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="ButtonLogin" Click="ButtonLogin_Click" >
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20" Height="20" Source="Images/Login Rounded_48px.png"/>
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Login"/>
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
+    <Controls:MetroWindow.Resources>
+        <local:DayButtonStyleSelector x:Key="CustomRotationStyle">
+            <local:DayButtonStyleSelector.SpecialStyleRetire>
+                <Style x:Name="CBStyle" TargetType="calendar:CalendarButton">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Red" Opacity="0.6"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </local:DayButtonStyleSelector.SpecialStyleRetire>
+            <local:DayButtonStyleSelector.SpecialStyleRotate>
+                <Style TargetType="calendar:CalendarButton">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Blue" Opacity="0.6"/>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </local:DayButtonStyleSelector.SpecialStyleRotate>
+        </local:DayButtonStyleSelector>
+    </Controls:MetroWindow.Resources>
+    <DockPanel LastChildFill="True">
+        
+        <Popup Name="popLink" StaysOpen="False" Placement="Center"  MaxWidth="900" PopupAnimation="Slide" AllowsTransparency="True">
+            <Border BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="2" Background="White">
+                <DataGrid IsReadOnly="True" AutoGenerateColumns="False" x:Name="DataGridEmployees" ItemsSource="{Binding Employees}" FontSize="14.667">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding Name}" Header="Name of Employee"/>
+                        <DataGridTextColumn Binding="{Binding 'Current Station'}" Header="Deployment Station" FontWeight="Thin"/>
+                        <DataGridTextColumn Binding="{Binding 'Type of Station'}" Header="Type of Station" FontWeight="Thin"/>
+                        <DataGridTextColumn Binding="{Binding 'Conduct History'}" Header="Conduct History" FontWeight="Thin"/>
+                        <DataGridTextColumn Binding="{Binding Profession}" Header="Profession" FontWeight="Thin"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+        </Popup>
+        <telerik:RadCalendar Columns="4" Rows="3"  DayButtonStyleSelector="{StaticResource CustomRotationStyle}" DayButtonStyle="{x:Null}" x:Name="HRRotateCalendar" AreWeekNumbersVisible="False" ViewsHeaderVisibility="Visible" HeaderVisibility="Visible">
+            <telerik:StyleManager.Theme>
+                <telerik:Windows8Theme/>
+            </telerik:StyleManager.Theme>
+        </telerik:RadCalendar>
+    </DockPanel>
+</Controls:MetroWindow>
